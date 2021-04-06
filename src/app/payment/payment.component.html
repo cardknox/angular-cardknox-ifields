@@ -1,0 +1,64 @@
+<form [formGroup]="paymentForm" novalidate>
+  <mat-card class="payment-card">
+    <mat-card-header>
+      <mat-card-title>Payment Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="third-width">
+            <input matInput placeholder="Name" formControlName="name">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <cardknox-ifields class="ifield-iframe" [type]="achType" [options]="achOptions" [account]="account"
+            (token)="achIfieldHandler.onToken($event)">
+          </cardknox-ifields>
+          <hr class="underline">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <cardknox-ifields class="ifield-iframe" [type]="cardType" [options]="cardOptions" [account]="account"
+            (token)="cardIfieldHandler.onToken($event)" (blur)="cardIfieldHandler.onBlur($event)">
+          </cardknox-ifields>
+          <hr class="underline">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <cardknox-ifields class="ifield-iframe" [type]="cvvType" [options]="cvvOptions" [issuer]="issuer"
+            [account]="account" (token)="cvvIfieldHandler.onToken($event)" (blur)="cvvIfieldHandler.onBlur($event)">
+          </cardknox-ifields>
+          <hr class="underline">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="third-width">
+            <input matInput placeholder="Amount" formControlName="amount">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="third-width">
+            <input matInput placeholder="Month" formControlName="month">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="third-width">
+            <input matInput placeholder="Year" formControlName="year">
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-card><strong>ACH token:</strong> {{achIfieldHandler.xToken}}</mat-card>
+      <mat-card><strong>Card token:</strong> {{cardIfieldHandler.xToken}}</mat-card>
+      <mat-card><strong>CVV token:</strong> {{cvvIfieldHandler.xToken}}</mat-card>
+    </mat-card-content>
+  </mat-card>
+</form>
