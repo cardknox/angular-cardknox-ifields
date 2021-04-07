@@ -225,6 +225,10 @@ export class AngularIfieldsComponent implements AfterViewInit, OnChanges, OnInit
       this.messagePoster?.setStyle(this.options.iFieldstyle);
   }
 
+  focusIfield() {
+    this.messagePoster?.focusIfield();
+  }
+
   validateProps() {
     var accountProps = this.account
       ? this.account.xKey

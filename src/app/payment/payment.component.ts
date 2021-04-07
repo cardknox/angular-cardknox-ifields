@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ACH_TYPE, CARD_TYPE, CVV_TYPE } from 'projects/cardknox/angular-ifields/src/public-api';
+// import { AngularIfieldsComponent } from 'projects/cardknox/angular-ifields/src/public-api';
 import { Options } from 'projects/cardknox/angular-ifields/src/typings';
 import { IfieldsHandler } from './ifieldsHandler';
 

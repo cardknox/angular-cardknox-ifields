@@ -13,26 +13,41 @@
       </div>
       <div class="row">
         <div class="col">
-          <cardknox-ifields class="ifield-iframe" [type]="achType" [options]="achOptions" [account]="account"
+          <cardknox-ifields #ach class="ifield-iframe" [type]="achType" [options]="achOptions" [account]="account"
             (token)="achIfieldHandler.onToken($event)">
           </cardknox-ifields>
           <hr class="underline">
         </div>
-      </div>
-      <div class="row">
         <div class="col">
-          <cardknox-ifields class="ifield-iframe" [type]="cardType" [options]="cardOptions" [account]="account"
-            (token)="cardIfieldHandler.onToken($event)" (blur)="cardIfieldHandler.onBlur($event)">
-          </cardknox-ifields>
-          <hr class="underline">
+          <button (click)="focus(achType)" mat-raised-button>Focus</button>
+          <button (click)="focus(achType)" mat-raised-button>Submit</button>
+          <button (click)="focus(achType)" mat-raised-button>Clear</button>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <cardknox-ifields class="ifield-iframe" [type]="cvvType" [options]="cvvOptions" [issuer]="issuer"
+          <cardknox-ifields #card class="ifield-iframe" [type]="cardType" [options]="cardOptions" [account]="account"
+            (token)="cardIfieldHandler.onToken($event)" (blur)="cardIfieldHandler.onBlur($event)">
+          </cardknox-ifields>
+          <hr class="underline">
+        </div>
+        <div class="col">
+          <button (click)="focus(cardType)" mat-raised-button>Focus</button>
+          <button (click)="focus(cardType)" mat-raised-button>Submit</button>
+          <button (click)="focus(cardType)" mat-raised-button>Clear</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <cardknox-ifields #cvv class="ifield-iframe" [type]="cvvType" [options]="cvvOptions" [issuer]="issuer"
             [account]="account" (token)="cvvIfieldHandler.onToken($event)" (blur)="cvvIfieldHandler.onBlur($event)">
           </cardknox-ifields>
           <hr class="underline">
+        </div>
+        <div class="col">
+          <button (click)="focus(cvvType)" mat-raised-button>Focus</button>
+          <button (click)="focus(cvvType)" mat-raised-button>Submit</button>
+          <button (click)="focus(cvvType)" mat-raised-button>Clear</button>
         </div>
       </div>
       <div class="row">
