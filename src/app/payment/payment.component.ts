@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ACH_TYPE, CARD_TYPE, CVV_TYPE } from 'projects/cardknox/angular-ifields/src/public-api';
-// import { AngularIfieldsComponent } from 'projects/cardknox/angular-ifields/src/public-api';
+import { ACH_TYPE, CARD_TYPE, CVV_TYPE, AngularIfieldsComponent } from 'projects/cardknox/angular-ifields/src/public-api';
 import { Options } from 'projects/cardknox/angular-ifields/src/typings';
 import { IfieldsHandler } from './ifieldsHandler';
 
@@ -17,6 +16,10 @@ export class PaymentComponent {
     year: null,
     month: null
   });
+
+  @ViewChild('ach') achIfield?: AngularIfieldsComponent;
+  @ViewChild('card') cardIfield?: AngularIfieldsComponent;
+  @ViewChild('cvv') cvvIfield?: AngularIfieldsComponent;
 
   achType = ACH_TYPE;
   cardType = CARD_TYPE;
@@ -60,7 +63,8 @@ export class PaymentComponent {
       },
       autoFormat: true,
       autoFormatSeparator: ' ',
-      enableLogging: false
+      enableLogging: false,
+      autoSubmit: false
     }
     this.achOptions = Object.assign({}, options, { placeholder: 'Checking Account Number' });
     this.cardOptions = Object.assign({}, options, { placeholder: 'Credit Card Number' });
@@ -69,5 +73,25 @@ export class PaymentComponent {
 
   get issuer() {
     return this.cardIfieldHandler.issuer || '';
+  }
+
+  private getIfieldFromType(type: string) {
+    switch (type) {
+      case ACH_TYPE:
+        return this.achIfield;
+      case CARD_TYPE:
+        return this.cardIfield;
+      case CVV_TYPE:
+        return this.cvvIfield;
+      default:
+        return null;
+    }
+  }
+
+  focus(type: string) {
+    const ifieldComponent = this.getIfieldFromType(type);
+    if (!ifieldComponent)
+      throw 'unknown component';
+    ifieldComponent.focusIfield();
   }
 }
