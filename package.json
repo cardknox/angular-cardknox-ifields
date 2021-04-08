@@ -7,7 +7,8 @@
     "build": "ng build @cardknox/angular-ifields --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publish": "npm run build && cd ./dist/cardknox/angular-ifields && npm publish"
   },
   "private": true,
   "dependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@cardknox/angular-ifields",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^11.2.8",
     "@angular/core": "^11.2.8"
