@@ -2,6 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@cardknox/angular-ifields": [
+        "dist/cardknox/angular-ifields/cardknox-angular-ifields",
+        "dist/cardknox/angular-ifields"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

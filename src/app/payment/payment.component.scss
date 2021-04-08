@@ -1,0 +1,43 @@
+.third-width {
+  width: 30%;
+}
+
+.ifield-iframe iframe{
+  height: 1000px;;
+}
+.payment-card {
+  min-width: 120px;
+  margin: 20px auto;
+}
+
+hr.underline{
+  width: 60%;
+  margin-left: 0;
+}
+
+button{
+  margin: 0 10px;
+}
+
+.hidden{
+  display: none;
+}
+.mat-radio-button {
+  display: block;
+  margin: 5px 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-basis: fill;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
