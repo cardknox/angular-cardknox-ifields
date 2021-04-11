@@ -184,13 +184,13 @@ There are 3 actions available on this component as well
 
 ### Focus
 
-`focus`
+`focusIfield`
 
 This action will set the focus to the ifield when called
 
 ### Clear
 
-`clear`
+`clearIfield`
 
 This action will clear the data from the ifield when called
 
@@ -205,8 +205,8 @@ This action will load the token for the ifield when called.
 
   @ViewChild('card') cardIfield?: AngularIfieldsComponent;
 
-  this.cardIfield.focus();
-  this.cardIfield.clear();
+  this.cardIfield.focusIfield();
+  this.cardIfield.clearIfield();
   this.cardIfield.getToken();
 ```
 

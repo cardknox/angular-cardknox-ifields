@@ -1,6 +1,23 @@
 {
   "name": "@cardknox/angular-ifields",
-  "version": "0.0.3",
+  "version": "0.0.4",
+  "keywords": [
+    "angular",
+    "cardknox",
+    "ifields",
+    "payment",
+    "credit card",
+    "gateway"
+  ],
+  "bugs": {
+    "url": "https://www.cardknox.com/contact/",
+    "email": "developersupport@cardknox.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cardknox/angular-cardknox-ifields.git"
+  },
+  "license": "GPL-3.0",
   "peerDependencies": {
     "@angular/common": "^11.2.8",
     "@angular/core": "^11.2.8"
