@@ -39,7 +39,7 @@ export class PaymentComponent {
   cvvIfieldHandler = new IfieldsHandler();
 
   account = {
-    xKey: "ifields_MosheSteinDev_Test2_a0ba3a7efa01449cb",
+    xKey: "",
     xSoftwareName: "vue-cardknox-ifields",
     xSoftwareVersion: "1.0.0"
   }
