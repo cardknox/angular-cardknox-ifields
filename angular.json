@@ -25,7 +25,6 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -34,7 +33,13 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -64,23 +69,24 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app:build"
+            "buildTarget": "app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
+              "buildTarget": "app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app:build"
+            "buildTarget": "app:build"
           }
         },
         "test": {
@@ -99,19 +105,6 @@
               "src/styles.scss"
             ],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         },
         "e2e": {
@@ -153,21 +146,11 @@
             "tsConfig": "projects/cardknox/angular-ifields/tsconfig.spec.json",
             "karmaConfig": "projects/cardknox/angular-ifields/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/cardknox/angular-ifields/tsconfig.lib.json",
-              "projects/cardknox/angular-ifields/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     }
   },
-  "defaultProject": "app"
+  "cli": {
+    "analytics": false
+  }
 }
