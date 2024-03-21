@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ACH_TYPE, CARD_TYPE, CVV_TYPE, AngularIfieldsComponent } from 'projects/cardknox/angular-ifields/src/public-api';
 import { Options } from 'projects/cardknox/angular-ifields/src/typings';
@@ -10,6 +10,7 @@ import { IfieldsHandler } from './ifieldsHandler';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent {
+  private fb = inject(FormBuilder);
   paymentForm = this.fb.group({
     name: null,
     amount: 0,
@@ -40,11 +41,11 @@ export class PaymentComponent {
 
   account = {
     xKey: "",
-    xSoftwareName: "vue-cardknox-ifields",
+    xSoftwareName: "angular-cardknox-ifields",
     xSoftwareVersion: "1.0.0"
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
     const options: Options = {
       iFieldstyle: {
         font: 'inherit',
@@ -67,9 +68,9 @@ export class PaymentComponent {
       autoSubmit: true,
       autoSubmitFormId: 'payment-form'
     }
-    this.achOptions = Object.assign({}, options, { placeholder: 'Checking Account Number' });
-    this.cardOptions = Object.assign({}, options, { placeholder: 'Credit Card Number' });
-    this.cvvOptions = Object.assign({}, options, { placeholder: 'CVV' });
+    this.achOptions = { ...options, placeholder: 'Checking Account Number' };
+    this.cardOptions = { ...options, placeholder: 'Credit Card Number' };
+    this.cvvOptions = { ...options, placeholder: 'CVV' };
   }
 
   get issuer() {
