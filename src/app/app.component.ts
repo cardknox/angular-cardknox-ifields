@@ -31,8 +31,8 @@ export class AppComponent {
     iFieldstyle: {}
   }
   account = {
-    xKey: "ifields_MosheSteinDev_Test2_a0ba3a7efa01449cb",
-    xSoftwareName: "vue-cardknox-ifields",
+    xKey: "",
+    xSoftwareName: "angular-cardknox-ifields",
     xSoftwareVersion: "1.0.0"
   }
   threeDS = {
