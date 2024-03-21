@@ -40,7 +40,7 @@ export class PaymentComponent {
 
   account = {
     xKey: "",
-    xSoftwareName: "vue-cardknox-ifields",
+    xSoftwareName: "angular-cardknox-ifields",
     xSoftwareVersion: "1.0.0"
   }
 
