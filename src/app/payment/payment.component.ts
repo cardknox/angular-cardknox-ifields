@@ -10,12 +10,7 @@ import { IfieldsHandler } from './ifieldsHandler';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent {
-  paymentForm = this.fb.group({
-    name: null,
-    amount: 0,
-    year: null,
-    month: null
-  });
+  paymentForm: any;
 
   @ViewChild('ach') achIfield?: AngularIfieldsComponent;
   @ViewChild('card') cardIfield?: AngularIfieldsComponent;
@@ -70,6 +65,12 @@ export class PaymentComponent {
     this.achOptions = Object.assign({}, options, { placeholder: 'Checking Account Number' });
     this.cardOptions = Object.assign({}, options, { placeholder: 'Credit Card Number' });
     this.cvvOptions = Object.assign({}, options, { placeholder: 'CVV' });
+    this.paymentForm = fb.group({
+      name: null,
+      amount: 0,
+      year: null,
+      month: null
+    });
   }
 
   get issuer() {
