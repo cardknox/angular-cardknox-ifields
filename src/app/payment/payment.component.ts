@@ -68,9 +68,9 @@ export class PaymentComponent {
       autoSubmit: true,
       autoSubmitFormId: 'payment-form'
     }
-    this.achOptions = Object.assign({}, options, { placeholder: 'Checking Account Number' });
-    this.cardOptions = Object.assign({}, options, { placeholder: 'Credit Card Number' });
-    this.cvvOptions = Object.assign({}, options, { placeholder: 'CVV' });
+    this.achOptions = { ...options, placeholder: 'Checking Account Number' };
+    this.cardOptions = { ...options, placeholder: 'Credit Card Number' };
+    this.cvvOptions = { ...options, placeholder: 'CVV' };
   }
 
   get issuer() {
