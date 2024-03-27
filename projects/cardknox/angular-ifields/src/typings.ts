@@ -1,9 +1,7 @@
-declare module 'angular-ifields' {
-  export interface Account {
-    xKey: string,
-    xSoftwareName: string,
-    xSoftwareVersion: string
-  }
+export interface Account {
+  xKey: string,
+  xSoftwareName: string,
+  xSoftwareVersion: string
 }
 
 export interface DataMessage {
@@ -98,7 +96,7 @@ export interface DataStore {
   ifieldDataCache: {}
 }
 
-export interface IfieldDataCache{
+export interface IfieldDataCache {
   length: number,
   isEmpty: boolean,
   isValid: boolean
