@@ -15,3 +15,9 @@ To run the test app, make you have your [iFields](https://docs.cardknox.com/card
 `npm install`
 
 `npm start`
+
+## Publish
+
+To publish the component, run,
+
+`npm run publish`
