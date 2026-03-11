@@ -1,7 +1,7 @@
 {
   "name": "@cardknox/angular-ifields",
   "description": "An Angular component for Cardknox iFields",
-  "version": "1.2.69",
+  "version": "1.2.86",
   "keywords": [
     "angular",
     "cardknox",
@@ -25,8 +25,8 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^17.3.1",
-    "@angular/core": "^17.3.1"
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0"
   },
   "dependencies": {
     "tslib": "^2.6.2"
