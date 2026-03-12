@@ -9,6 +9,7 @@ const iframeSrc = `https://cdn.cardknox.com/ifields/${IFIELDS_VERSION}/ifield.ht
 
 @Component({
   selector: 'cardknox-ifields',
+  standalone: false,
   template: `
   <iframe
     src="${iframeSrc}"

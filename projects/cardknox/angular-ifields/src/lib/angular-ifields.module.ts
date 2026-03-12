@@ -5,8 +5,7 @@ import { AngularIfieldsComponent } from './angular-ifields.component';
 
 @NgModule({
   declarations: [AngularIfieldsComponent],
-  imports: [
-  ],
+  imports: [],
   exports: [AngularIfieldsComponent],
   schemas: []
 })
