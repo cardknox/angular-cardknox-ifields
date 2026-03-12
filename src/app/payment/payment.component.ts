@@ -6,6 +6,7 @@ import { IfieldsHandler } from './ifieldsHandler';
 
 @Component({
   selector: 'app-payment',
+  standalone: false,
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })

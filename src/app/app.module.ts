@@ -13,12 +13,13 @@ import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AppComponent,
+    PaymentComponent
+  ],
   imports: [
     BrowserModule,
     AngularIfieldsModule,
-    AppComponent,
-    PaymentComponent,
     NoopAnimationsModule,
     MatInputModule,
     MatButtonModule,
