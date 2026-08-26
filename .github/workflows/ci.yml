@@ -1,0 +1,111 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+# Least privilege: this workflow only needs to read the repo.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Pinned release + checksum of the Aikido Safe Chain installer.
+  # Bump both together: https://github.com/AikidoSec/safe-chain/releases
+  SAFE_CHAIN_VERSION: 1.5.15
+  SAFE_CHAIN_SHA256: de0565e3d6346407a604e84e639e95fea8758748063da2216bbfdca5feda5dd2
+
+jobs:
+  # Single job on purpose: the Safe Chain gate has to wrap the very `npm ci`
+  # that build and test depend on. Splitting these into separate jobs would
+  # mean re-installing dependencies per job, so each would need its own gate.
+  build:
+    name: Safe Chain gate, build, test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # No dependency cache here on purpose: a warm cache would let packages
+      # reach the workspace without passing through the Safe Chain gate.
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22.x
+
+      - name: Install Aikido Safe Chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://github.com/AikidoSec/safe-chain/releases/download/${SAFE_CHAIN_VERSION}/install-safe-chain.sh"
+          curl -fsSL "$url" -o /tmp/install-safe-chain.sh
+          echo "${SAFE_CHAIN_SHA256}  /tmp/install-safe-chain.sh" | sha256sum -c -
+          # --ci installs executable shims into ~/.safe-chain/shims instead of shell aliases.
+          sh /tmp/install-safe-chain.sh --ci
+          rm -f /tmp/install-safe-chain.sh
+
+      - name: Put Safe Chain shims ahead of npm on PATH
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The installer does not write to $GITHUB_PATH, so without this the
+          # later `npm ci` would run unwrapped and the gate would silently pass.
+          echo "$HOME/.safe-chain/shims" >> "$GITHUB_PATH"
+          echo "$HOME/.safe-chain/bin" >> "$GITHUB_PATH"
+
+      - name: Verify the gate is actually intercepting npm
+        shell: bash
+        run: |
+          set -euo pipefail
+          safe-chain --version
+
+          # Fail closed: confirm `npm` resolves to the shim, not the real binary.
+          npm_path="$(command -v npm)"
+          echo "npm resolves to: $npm_path"
+          case "$npm_path" in
+            "$HOME/.safe-chain/shims"/*) ;;
+            *) echo "::error::npm is not going through Safe Chain ($npm_path)"; exit 1 ;;
+          esac
+
+          # Expected output: "OK: Safe-chain works!"
+          npm safe-chain-verify
+
+      # Malware in any resolved package blocks the install, failing the job here.
+      - name: Install dependencies (gated by Safe Chain)
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+
+      - name: Build library
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build
+
+      - name: Locate Chrome for headless tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v chromium-browser || command -v chromium || true)"
+          if [ -z "$chrome" ]; then
+            echo "::error::No Chrome binary found for ChromeHeadless"
+            exit 1
+          fi
+          echo "Using Chrome at: $chrome"
+          echo "CHROME_BIN=$chrome" >> "$GITHUB_ENV"
+
+      # karma.conf.js defaults to a watching, non-headless Chrome, so CI overrides both.
+      - name: Test
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm test -- --watch=false --browsers=ChromeHeadless
